@@ -1,0 +1,7 @@
+npm init // Genera el .json
+
+npm install --save yargs colors // Instala las librerias en el json
+
+//generar archivo app.json
+
+node app tarea -d "xxxxx" //Genera una tarea usando yargs
