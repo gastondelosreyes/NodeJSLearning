@@ -1,17 +1,13 @@
 const express = require('express');
-
 const bcrypt = require('bcrypt');
-
 const User = require('../models/user');
-
 const _ = require('underscore'); //El estandar es usar como _
-
+const middlewares = require('../middlewares/autenticacion')
 const app = express();
 
 // GET para traer registros
-app.get('/usuario', function(req, res) {
+app.get('/user', [middlewares.verificaToken, middlewares.verificaAdminRole], function(req, res) {
     let desde = Number(req.query.desde) || 0;
-
     let limite = Number(req.query.limite) || 5; // req.query genera un parametro en la URL poniendo ?limite=valor
     let conditions = {
         estado: true
@@ -41,7 +37,7 @@ app.get('/usuario', function(req, res) {
 })
 
 // POST para crear registros(
-app.post('/usuario', function(req, res) {
+app.post('/user', [middlewares.verificaToken, middlewares.verificaAdminRole], function(req, res) {
     let body = req.body;
     let user = new User({
         nombre: body.nombre,
@@ -67,7 +63,7 @@ app.post('/usuario', function(req, res) {
 });
 
 // PUT para actualizar registros
-app.put('/usuario/:id', function(req, res) {
+app.put('/user/:id', [middlewares.verificaToken, middlewares.verificaAdminRole], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
     User.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, userDB) => {
@@ -86,7 +82,7 @@ app.put('/usuario/:id', function(req, res) {
 })
 
 // DELETE
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/user/:id', [middlewares.verificaToken, middlewares.verificaAdminRole], function(req, res) {
     let id = req.params.id;
     let changes = {
         estado: false

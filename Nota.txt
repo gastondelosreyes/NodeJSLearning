@@ -1,0 +1,7 @@
+Tokens JWT - Json Web Token
+
+    Header: Información sobre el algoritmo de encriptación con el tipo de TOKEN
+    Payload: Información que está en el TOKEN
+    Firma: Se usa para verificar que el TOKEN es válido.
+
+Cada máquina va a tener su token para poder solicitar Información.
