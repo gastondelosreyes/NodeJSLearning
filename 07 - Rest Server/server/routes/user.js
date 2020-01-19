@@ -37,7 +37,7 @@ app.get('/user', [middlewares.verificaToken, middlewares.verificaAdminRole], fun
 })
 
 // POST para crear registros(
-app.post('/user', [middlewares.verificaToken, middlewares.verificaAdminRole], function(req, res) {
+app.post('/user', function(req, res) {
     let body = req.body;
     let user = new User({
         nombre: body.nombre,

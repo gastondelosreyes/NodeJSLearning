@@ -51,4 +51,4 @@ userSchema.plugin(uniqueValidator, {
     message: 'El {PATH} ya está en uso'
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('User', userSchema)
