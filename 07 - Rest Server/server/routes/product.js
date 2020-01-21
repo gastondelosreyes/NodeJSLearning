@@ -62,6 +62,11 @@ app.get('/product/:id', middlewares.verificaToken, (req, res) => {
     });
 });
 
+// -------------------------------
+//  Mostrar los productos en base a un termino de busqueda
+//      Mostrar el usuario y la categoria asociada
+// -------------------------------
+
 app.get('/product/search/:term', middlewares.verificaToken, (req, res) => {
     let term = req.params.term;
 
@@ -174,6 +179,7 @@ app.put('/product/:id', middlewares.verificaToken, (req, res) => {
         });
     });
 });
+
 // -------------------------------
 //  Eliminar un producto
 //      Cambiar la disponibilidad (BORRADO LOGICO)
